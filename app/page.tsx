@@ -4,51 +4,96 @@ import { HeroNeon } from "@/components/HeroNeon";
 
 const PHONE = '07 67 87 80 34';
 
+const SERVICES = [
+  { icon: '🔧', title: 'Dépannage', desc: 'Réparation sur place pour les petites pannes mécaniques', color: 'red' },
+  { icon: '🚗', title: 'Remorquage', desc: 'Transport sécurisé de votre véhicule partout dans le Nord', color: 'red' },
+  { icon: '🔋', title: 'Batterie', desc: 'Changement et recharge batterie disponible 24h/24', color: 'blue' },
+  { icon: '⚙️', title: 'Crevaison', desc: 'Réparation rapide de pneu sur place ou en atelier', color: 'blue' },
+  { icon: '📍', title: 'Rapatriement', desc: 'Assistance routière complète vers votre domicile', color: 'red' },
+  { icon: '🚨', title: 'Urgence', desc: 'Intervention immédiate garantie 20–30 min max', color: 'red' },
+];
+
+const AVANTAGES = [
+  { num: '01', title: 'Rapidité', detail: '20–30 min d\'intervention sur Lille et la MEL', color: '#ef4444' },
+  { num: '02', title: 'Fiabilité', detail: 'Techniciens qualifiés et équipement professionnel', color: '#3b82f6' },
+  { num: '03', title: 'Disponibilité', detail: 'Service 24h/24, 7j/7, même jours fériés', color: '#ef4444' },
+  { num: '04', title: 'Transparence', detail: 'Prix annoncés avant intervention, sans surprise', color: '#3b82f6' },
+];
+
+const ZONES = ['Lille', 'Roubaix', 'Tourcoing', 'Villeneuve-d\'Ascq', 'Lens', 'Béthune', 'Arras', 'Douai', 'Valenciennes', 'Calais'];
+
 export default function HomePage() {
   return (
     <main className="bg-black text-white overflow-x-hidden">
-      {/* HERO PREMIUM */}
       <HeroNeon />
 
-      {/* SECTION SERVICES */}
-      <section className="py-24 bg-gradient-to-b from-black via-slate-950 to-black border-t border-red-500/20">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="font-black text-5xl md:text-6xl text-white mb-6">
-              Nos <span className="bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">services</span>
+      {/* ── SECTION SERVICES ── */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-black via-slate-950 to-black border-t border-red-500/20">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+          <div className="text-center mb-10 sm:mb-16">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase text-red-300 border border-red-500/40 bg-red-950/20 mb-4">
+              Nos prestations
+            </span>
+            <h2 className="font-black text-white mb-4 leading-none"
+              style={{ fontSize: 'clamp(2rem,6vw,4rem)' }}>
+              Nos&nbsp;
+              <span style={{
+                background: 'linear-gradient(90deg,#ef4444,#dc2626)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 12px rgba(220,38,38,0.6))',
+              }}>services</span>
             </h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+            <p className="text-slate-300 mx-auto" style={{ fontSize: 'clamp(0.95rem,2.5vw,1.15rem)', maxWidth: 560 }}>
               Dépannage complet et rapide pour tous vos besoins automobiles
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: '🔧', title: 'Dépannage', desc: 'Réparation sur place pour les petites pannes' },
-              { icon: '🚗', title: 'Remorquage', desc: 'Transport sécurisé de votre véhicule' },
-              { icon: '🔋', title: 'Batterie', desc: 'Changement et recharge batterie 24/7' },
-              { icon: '⚙️', title: 'Crevaison', desc: 'Réparation rapide de pneu' },
-              { icon: '📍', title: 'Rapatriement', desc: 'Assistance routière complète' },
-              { icon: '✓', title: 'Urgence', desc: 'Intervention immédiate garantie' },
-            ].map((service, i) => (
-              <div
-                key={i}
-                className="group relative p-8 rounded-2xl border-2 border-slate-700 bg-gradient-to-br from-slate-900/50 to-black hover:border-red-500/50 hover:from-red-950/20 transition-all duration-300"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {SERVICES.map((s, i) => (
+              <div key={i}
+                className="group relative p-6 sm:p-8 rounded-2xl overflow-hidden cursor-default"
                 style={{
-                  animation: `slide-up 0.6s ease-out forwards`,
-                  animationDelay: `${i * 0.1}s`,
-                  opacity: 0,
+                  background: 'linear-gradient(135deg,rgba(15,15,25,0.95),rgba(5,5,15,0.98))',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  transition: 'border-color .3s,transform .3s',
+                  animation: `slide-up 0.5s ease-out ${i * 0.08}s both`,
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget;
+                  el.style.borderColor = s.color === 'red' ? 'rgba(239,68,68,0.55)' : 'rgba(59,130,246,0.55)';
+                  el.style.transform = 'translateY(-4px)';
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget;
+                  el.style.borderColor = 'rgba(255,255,255,0.08)';
+                  el.style.transform = 'translateY(0)';
                 }}
               >
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{
-                  boxShadow: 'inset 0 0 30px rgba(239, 68, 68, 0.1), 0 0 20px rgba(239, 68, 68, 0.2)',
-                }} />
+                {/* Glow coin */}
+                <div className="absolute top-0 left-0 w-24 h-24 rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: s.color === 'red' ? 'radial-gradient(circle,rgba(220,38,38,0.18) 0%,transparent 70%)' : 'radial-gradient(circle,rgba(59,130,246,0.18) 0%,transparent 70%)' }} />
+                {/* Ligne néon en haut */}
+                <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: s.color === 'red' ? 'linear-gradient(90deg,transparent,rgba(239,68,68,0.8),transparent)' : 'linear-gradient(90deg,transparent,rgba(59,130,246,0.8),transparent)' }} />
 
                 <div className="relative z-10">
-                  <div className="text-5xl mb-4">{service.icon}</div>
-                  <h3 className="font-bold text-2xl text-white mb-3">{service.title}</h3>
-                  <p className="text-slate-300">{service.desc}</p>
+                  <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 select-none">{s.icon}</div>
+                  <h3 className="font-bold mb-2 sm:mb-3 leading-tight"
+                    style={{
+                      fontSize: 'clamp(1.1rem,3vw,1.4rem)',
+                      color: '#fff',
+                      textShadow: s.color === 'red'
+                        ? '0 0 14px rgba(239,68,68,0.7), 0 0 30px rgba(239,68,68,0.3)'
+                        : '0 0 14px rgba(59,130,246,0.7), 0 0 30px rgba(59,130,246,0.3)',
+                      transition: 'text-shadow .3s',
+                    }}>
+                    {s.title}
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed" style={{ fontSize: 'clamp(0.85rem,2vw,0.95rem)' }}>
+                    {s.desc}
+                  </p>
                 </div>
               </div>
             ))}
@@ -56,29 +101,61 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION AVANTAGES */}
-      <section className="py-24 bg-black border-t border-blue-500/20">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="font-black text-5xl md:text-6xl text-white mb-6">
-              Pourquoi nous <span className="bg-gradient-to-r from-blue-400 to-blue-500 bg-clip-text text-transparent">choisir</span>
+      {/* ── SECTION AVANTAGES ── */}
+      <section className="py-16 sm:py-24 bg-black border-t border-blue-500/15">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+          <div className="text-center mb-10 sm:mb-16">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase text-blue-300 border border-blue-500/40 bg-blue-950/20 mb-4">
+              Nos atouts
+            </span>
+            <h2 className="font-black text-white leading-none"
+              style={{ fontSize: 'clamp(2rem,6vw,4rem)' }}>
+              Pourquoi nous&nbsp;
+              <span style={{
+                background: 'linear-gradient(90deg,#3b82f6,#2563eb)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 12px rgba(59,130,246,0.6))',
+              }}>choisir</span>
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {[
-              { num: '01', title: 'Rapidité', detail: '20-30 minutes d\'intervention sur Lille et la MEL' },
-              { num: '02', title: 'Fiabilité', detail: 'Techniciens qualifiés et équipement professionnel' },
-              { num: '03', title: 'Disponibilité', detail: 'Service 24h/24, 7j/7, même jours fériés' },
-              { num: '04', title: 'Transparence', detail: 'Prix annoncés avant intervention, sans surprise' },
-            ].map((item, i) => (
-              <div key={i} className="flex gap-8 items-start group">
-                <div className="text-6xl font-black text-red-500/20 group-hover:text-red-500/40 transition-colors">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+            {AVANTAGES.map((item, i) => (
+              <div key={i}
+                className="flex gap-4 sm:gap-6 items-start p-5 sm:p-7 rounded-2xl group"
+                style={{
+                  background: 'linear-gradient(135deg,rgba(10,10,20,0.9),rgba(4,4,12,0.95))',
+                  border: '1px solid rgba(255,255,255,0.07)',
+                  transition: 'border-color .3s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = item.color === '#ef4444' ? 'rgba(239,68,68,0.4)' : 'rgba(59,130,246,0.4)')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}
+              >
+                <div className="font-black leading-none flex-shrink-0 transition-all duration-300"
+                  style={{
+                    fontSize: 'clamp(2.5rem,8vw,4rem)',
+                    color: item.color,
+                    opacity: 0.22,
+                    textShadow: `0 0 20px ${item.color}`,
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '0.55'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '0.22'; }}
+                >
                   {item.num}
                 </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-slate-300 text-lg">{item.detail}</p>
+                <div className="pt-1">
+                  <h3 className="font-bold text-white mb-1.5"
+                    style={{
+                      fontSize: 'clamp(1.1rem,3vw,1.4rem)',
+                      textShadow: `0 0 16px ${item.color}80, 0 0 32px ${item.color}40`,
+                    }}>
+                    {item.title}
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed" style={{ fontSize: 'clamp(0.88rem,2vw,1rem)' }}>
+                    {item.detail}
+                  </p>
                 </div>
               </div>
             ))}
@@ -86,78 +163,117 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
-      <section className="py-24 bg-gradient-to-b from-black via-red-950/10 to-black">
-        <div className="container mx-auto px-4 max-w-4xl text-center">
-          <h2 className="text-5xl md:text-6xl font-black text-white mb-8">
-            Vous avez besoin d&apos;aide?
-          </h2>
-          <p className="text-xl text-slate-300 mb-12">
-            Appelez-nous maintenant, nos techniciens arrivent en 20-30 minutes
-          </p>
+      {/* ── SECTION ZONES ── */}
+      <section className="py-16 sm:py-20 border-t border-white/5 bg-gradient-to-b from-slate-950 to-black">
+        <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+          <div className="text-center mb-10 sm:mb-14">
+            <span className="inline-block px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase text-red-300 border border-red-500/40 bg-red-950/20 mb-4">
+              Zones desservies
+            </span>
+            <h2 className="font-black text-white leading-none"
+              style={{ fontSize: 'clamp(2rem,6vw,4rem)' }}>
+              Nous intervenons&nbsp;
+              <span style={{
+                background: 'linear-gradient(90deg,#ef4444,#dc2626)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 12px rgba(220,38,38,0.6))',
+              }}>partout</span>
+            </h2>
+            <p className="text-slate-400 mt-3" style={{ fontSize: 'clamp(0.9rem,2.2vw,1rem)' }}>
+              Nord (59) · Pas-de-Calais (62) · toute la MEL
+            </p>
+          </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a
-              href={`tel:${PHONE}`}
-              className="group relative px-12 py-6 bg-gradient-to-r from-red-600 to-red-700 text-white font-bold text-xl rounded-xl hover:shadow-2xl hover:shadow-red-600/50 transition-all duration-300 hover:-translate-y-1 border-2 border-red-500/50"
-            >
-              ☎️ Appeler maintenant
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 rounded-xl" />
-            </a>
-            <button className="px-12 py-6 border-2 border-slate-400 text-slate-200 font-bold text-xl rounded-xl hover:border-white hover:text-white hover:bg-white/5 transition-all duration-300">
-              Demander une intervention
-            </button>
+          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
+            {ZONES.map((ville, i) => (
+              <a key={i}
+                href={`/zones-intervention/${ville.toLowerCase().replace(/['\s]/g, '-').replace(/[éèê]/g, 'e')}`}
+                className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300"
+                style={{
+                  border: '1px solid rgba(239,68,68,0.35)',
+                  background: 'rgba(220,38,38,0.06)',
+                  color: 'rgba(255,255,255,0.75)',
+                  textShadow: '0 0 8px rgba(239,68,68,0)',
+                  transition: 'all .25s',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget;
+                  el.style.borderColor = 'rgba(239,68,68,0.75)';
+                  el.style.background = 'rgba(220,38,38,0.15)';
+                  el.style.color = '#fff';
+                  el.style.textShadow = '0 0 10px rgba(239,68,68,0.7)';
+                  el.style.boxShadow = '0 0 18px rgba(239,68,68,0.25)';
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget;
+                  el.style.borderColor = 'rgba(239,68,68,0.35)';
+                  el.style.background = 'rgba(220,38,38,0.06)';
+                  el.style.color = 'rgba(255,255,255,0.75)';
+                  el.style.textShadow = 'none';
+                  el.style.boxShadow = 'none';
+                }}
+              >
+                {ville}
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-black border-t border-slate-800 py-12">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div>
-              <h4 className="font-bold text-white mb-4">SM Dépannage</h4>
-              <p className="text-slate-400 text-sm">Dépannage automobile rapide et fiable 24h/24</p>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Services</h4>
-              <ul className="space-y-2 text-slate-400 text-sm">
-                <li><a href="#" className="hover:text-red-500 transition-colors">Dépannage</a></li>
-                <li><a href="#" className="hover:text-red-500 transition-colors">Remorquage</a></li>
-                <li><a href="#" className="hover:text-red-500 transition-colors">Batterie</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Zones</h4>
-              <ul className="space-y-2 text-slate-400 text-sm">
-                <li><a href="#" className="hover:text-red-500 transition-colors">Lille</a></li>
-                <li><a href="#" className="hover:text-red-500 transition-colors">Nord (59)</a></li>
-                <li><a href="#" className="hover:text-red-500 transition-colors">Pas-de-Calais (62)</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Contact</h4>
-              <p className="text-red-500 font-bold text-lg mb-2">{PHONE}</p>
-              <p className="text-slate-400 text-sm">24h/24, 7j/7</p>
-            </div>
-          </div>
+      {/* ── CTA FINAL ── */}
+      <section className="py-16 sm:py-24 bg-gradient-to-b from-black via-red-950/8 to-black">
+        <div className="container mx-auto px-4 sm:px-6 max-w-4xl text-center">
+          <h2 className="font-black text-white mb-4 leading-none"
+            style={{ fontSize: 'clamp(2rem,7vw,4.5rem)' }}>
+            Vous avez besoin d&apos;aide&nbsp;?
+          </h2>
+          <p className="text-slate-300 mb-8 sm:mb-12 mx-auto"
+            style={{ fontSize: 'clamp(1rem,2.8vw,1.25rem)', maxWidth: 480 }}>
+            Appelez-nous maintenant — nos techniciens arrivent en <strong className="text-red-400">20–30 min</strong>
+          </p>
 
-          <div className="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
-            <p>© 2026 SM Dépannage. Tous droits réservés.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href={`tel:${PHONE}`}
+              className="group relative flex items-center justify-center gap-3 px-8 py-5 rounded-xl font-bold text-white overflow-hidden"
+              style={{
+                fontSize: 'clamp(1rem,3vw,1.2rem)',
+                background: 'linear-gradient(135deg,#dc2626,#b91c1c)',
+                boxShadow: '0 0 32px rgba(220,38,38,0.5),0 4px 24px rgba(0,0,0,0.5)',
+                border: '1px solid rgba(239,68,68,0.5)',
+                transition: 'transform .2s,box-shadow .2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform='translateY(-3px)'; e.currentTarget.style.boxShadow='0 0 48px rgba(220,38,38,0.65),0 8px 32px rgba(0,0,0,0.6)'; }}
+              onMouseLeave={e => { e.currentTarget.style.transform=''; e.currentTarget.style.boxShadow='0 0 32px rgba(220,38,38,0.5),0 4px 24px rgba(0,0,0,0.5)'; }}
+            >
+              <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              Appeler maintenant — {PHONE}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+            </a>
+            <a href="/contact"
+              className="flex items-center justify-center px-8 py-5 rounded-xl font-bold text-white transition-all duration-300"
+              style={{
+                fontSize: 'clamp(1rem,3vw,1.2rem)',
+                border: '1px solid rgba(148,163,184,0.3)',
+                background: 'rgba(255,255,255,0.04)',
+                backdropFilter: 'blur(8px)',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background='rgba(255,255,255,0.09)'; e.currentTarget.style.borderColor='rgba(255,255,255,0.4)'; }}
+              onMouseLeave={e => { e.currentTarget.style.background='rgba(255,255,255,0.04)'; e.currentTarget.style.borderColor='rgba(148,163,184,0.3)'; }}
+            >
+              Demander une intervention
+            </a>
           </div>
         </div>
-      </footer>
+      </section>
 
       <style jsx>{`
         @keyframes slide-up {
-          0% {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>
     </main>

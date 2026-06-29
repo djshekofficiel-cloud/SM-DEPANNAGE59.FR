@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Tarifs dépannage auto Lille — Prix remorquage & intervention",
   description:
     "Tarifs transparents pour le dépannage et le remorquage auto à Lille et dans le 59/62. Devis gratuit par téléphone avant toute intervention.",
-  alternates: { canonical: "https://votredomaine.fr/tarifs" },
+  alternates: { canonical: "https://depannage-lille.vercel.app/tarifs" },
 };
 
 const PHONE = "07 67 87 80 34";

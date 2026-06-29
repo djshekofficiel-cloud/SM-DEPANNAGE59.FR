@@ -41,7 +41,7 @@ export default function ContactForm() {
       }
     } catch {
       setStatus("error");
-      setMessage("Problème de connexion. Appelez-nous directement au +33 X XX XX XX XX.");
+      setMessage("Problème de connexion. Appelez-nous directement au 07 67 87 80 34.");
     }
   }
 

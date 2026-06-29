@@ -55,7 +55,9 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "SMDepannage <contact@votredomaine.fr>",
+        // Domaine de test Resend (fonctionne sans vérification). Remplacer par
+        // votre domaine vérifié une fois configuré : "SM Dépannage <contact@votre-domaine.fr>".
+        from: "SM Dépannage <onboarding@resend.dev>",
         to: [recipientEmail],
         subject: "Intervention - " + safTypePanne + " - " + safNom,
         html: "<h2>Demande intervention</h2><p>Nom: " + safNom + "</p><p>Tel: " + safTel + "</p><p>Lieu: " + safLieu + "</p><p>Type: " + safTypePanne + "</p><p>Message: " + safMessage + "</p>",

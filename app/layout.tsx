@@ -22,7 +22,7 @@ const sora = Sora({
   variable: "--font-sora",
 });
 
-const SITE_URL = "https://depannage-lille-jzit9ibur-djshekofficiel-9102s-projects.vercel.app";
+const SITE_URL = "https://depannage-lille.vercel.app";
 
 // ─── Métadonnées globales ────────────────────────────────────────────────────
 export const metadata: Metadata = {

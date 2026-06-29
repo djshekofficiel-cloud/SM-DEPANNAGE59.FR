@@ -22,7 +22,7 @@ export function generateMetadata({ params }: PageProps): Metadata {
   return {
     title: s.titre,
     description: s.description,
-    alternates: { canonical: `https://votredomaine.fr/services/${s.slug}` },
+    alternates: { canonical: `https://depannage-lille.vercel.app/services/${s.slug}` },
   };
 }
 

@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "À propos — SM Dépannage, dépanneurs professionnels Lille",
   description:
     "Qui sommes-nous ? SM Dépannage, équipe de dépanneurs professionnels basés à Lille, au service des automobilistes du 59 et du 62 depuis + de 10 ans.",
-  alternates: { canonical: "https://votredomaine.fr/a-propos" },
+  alternates: { canonical: "https://depannage-lille.vercel.app/a-propos" },
 };
 
 const PHONE = "07 67 87 80 34";

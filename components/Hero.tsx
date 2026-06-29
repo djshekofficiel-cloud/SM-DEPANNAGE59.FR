@@ -26,6 +26,25 @@ export default function Hero({
 
   return (
     <section className="relative overflow-hidden border-b border-white/10">
+      {/* Logo SM en grand avec effet néon */}
+      <div className="relative pt-8 pb-6 flex justify-center">
+        <div className="relative">
+          {/* Effet néon rougeoyant */}
+          <div className="absolute inset-0 -z-10 blur-2xl bg-sm-red-600/40 rounded-full scale-150 animate-pulse" />
+          <div className="absolute inset-0 -z-10 blur-3xl bg-sm-red-500/20 rounded-full scale-125 animate-pulse" style={{ animationDelay: '0.5s' }} />
+
+          {/* Logo */}
+          <img
+            src="/brand/sm-depannage-logo.png"
+            alt="SM DÉPANNAGE"
+            className="h-32 sm:h-40 md:h-48 w-auto drop-shadow-2xl"
+            style={{
+              filter: 'drop-shadow(0 0 20px rgba(211, 47, 47, 0.6)) drop-shadow(0 0 40px rgba(211, 47, 47, 0.3))'
+            }}
+          />
+        </div>
+      </div>
+
       {/* Fond : grille + aurora + halos + spotlights */}
       <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
         <Spotlight className="-top-40 left-0 md:left-40 md:-top-20" fill="#d32f2f" />

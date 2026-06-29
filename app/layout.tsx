@@ -7,6 +7,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import CallButton from "@/components/CallButton";
 import Logo from "@/components/Logo";
+import { Header } from "@/components/Header";
 
 const StarsCanvas = dynamic(
   () => import("@/components/ui/StarsCanvas").then((m) => ({ default: m.StarsCanvas })),
@@ -93,16 +94,8 @@ const jsonLd = {
   geo: { "@type": "GeoCoordinates", latitude: 50.6292, longitude: 3.0573 },
 };
 
-const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/zones-intervention", label: "Zones" },
-  { href: "/tarifs", label: "Tarifs" },
-  { href: "/a-propos", label: "À propos" },
-  { href: "/contact", label: "Contact" },
-];
-
 const PHONE = "07 67 87 80 34";
-const PHONE_LABEL = "+33 X XX XX XX XX";
+const PHONE_LABEL = "07 67 87 80 34";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -115,39 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans text-white antialiased">
         <StarsCanvas />
-        {/* ── HEADER ─────────────────────────────────────────────────── */}
-        <header className="sticky top-0 z-50 border-b border-white/10 bg-ink-950/70 backdrop-blur-xl">
-          <div className="container-x">
-            <div className="flex items-center justify-between h-16">
-              {/* Logo */}
-              <Link href="/" aria-label="SM Dépannage — accueil" className="transition-transform hover:scale-[1.03]">
-                <Logo markClassName="h-9 w-9" />
-              </Link>
-
-              {/* Nav desktop */}
-              <nav className="hidden md:flex items-center gap-7" aria-label="Navigation principale">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="relative text-sm font-medium text-white/70 hover:text-white transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-sm-red-500 hover:after:w-full after:transition-all"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-
-              {/* CTA téléphone desktop */}
-              <a href={`tel:${PHONE}`} className="hidden md:inline-flex btn-primary !px-5 !py-2.5 text-sm" aria-label="Appeler SM Dépannage">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full rounded-full bg-white/80 animate-pulse-ring" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
-                </span>
-                {PHONE_LABEL}
-              </a>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         {/* ── BANDEAU URGENCE (lisible, non-marquee) ─────────────────── */}
         <div className="border-b border-white/10 bg-ink-900/85">

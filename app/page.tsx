@@ -1,8 +1,12 @@
 'use client';
 
 import { HeroNeon } from "@/components/HeroNeon";
+import { villes } from "@/lib/villes";
 
 const PHONE = '07 67 87 80 34';
+
+// Villes affichées sur la home — issues directement de lib/villes.ts (zéro lien mort).
+const ZONES = villes.slice(0, 12);
 
 const SERVICES = [
   { icon: '🔧', title: 'Dépannage', desc: 'Réparation sur place pour les petites pannes mécaniques', color: 'red' },
@@ -19,8 +23,6 @@ const AVANTAGES = [
   { num: '03', title: 'Disponibilité', detail: 'Service 24h/24, 7j/7, même jours fériés', color: '#ef4444' },
   { num: '04', title: 'Transparence', detail: 'Prix annoncés avant intervention, sans surprise', color: '#3b82f6' },
 ];
-
-const ZONES = ['Lille', 'Roubaix', 'Tourcoing', 'Villeneuve-d\'Ascq', 'Lens', 'Béthune', 'Arras', 'Douai', 'Valenciennes', 'Calais'];
 
 export default function HomePage() {
   return (
@@ -187,9 +189,9 @@ export default function HomePage() {
           </div>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
-            {ZONES.map((ville, i) => (
-              <a key={i}
-                href={`/zones-intervention/${ville.toLowerCase().replace(/['\s]/g, '-').replace(/[éèê]/g, 'e')}`}
+            {ZONES.map((ville) => (
+              <a key={ville.slug}
+                href={`/zones-intervention/${ville.slug}`}
                 className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full font-semibold text-sm sm:text-base transition-all duration-300"
                 style={{
                   border: '1px solid rgba(239,68,68,0.35)',
@@ -215,7 +217,7 @@ export default function HomePage() {
                   el.style.boxShadow = 'none';
                 }}
               >
-                {ville}
+                {ville.nom}
               </a>
             ))}
           </div>

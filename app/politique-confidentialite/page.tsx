@@ -6,7 +6,7 @@ import PageHeader from "@/components/PageHeader";
 export const metadata: Metadata = {
   title: "Politique de confidentialité — SM Dépannage",
   description: "Politique de confidentialité et traitement des données personnelles du site SM Dépannage.",
-  alternates: { canonical: "https://votredomaine.fr/politique-confidentialite" },
+  alternates: { canonical: "https://depannage-lille.vercel.app/politique-confidentialite" },
   robots: { index: false },
 };
 
@@ -20,7 +20,7 @@ export default function PolitiqueConfidentialitePage() {
       <div className="mx-auto max-w-3xl px-5 sm:px-6 lg:px-8 py-16 prose prose-invert prose-headings:font-display prose-a:text-ember-400 text-white/70 space-y-8">
         <section>
           <h2 className="text-xl font-bold text-white">1. Responsable du traitement</h2>
-          <p>[Raison sociale], [Adresse], contact@votredomaine.fr — est responsable du traitement de vos données personnelles.</p>
+          <p>[Raison sociale], [Adresse], [email à compléter] — est responsable du traitement de vos données personnelles.</p>
         </section>
 
         <section>
@@ -66,7 +66,7 @@ export default function PolitiqueConfidentialitePage() {
             <li><strong>Suppression :</strong> demander l&apos;effacement de vos données</li>
             <li><strong>Opposition :</strong> vous opposer à un traitement</li>
           </ul>
-          <p>Pour exercer ces droits : contact@votredomaine.fr</p>
+          <p>Pour exercer ces droits, contactez-nous au 07 67 87 80 34 (ou par email : [à compléter]).</p>
           <p>Vous pouvez également déposer une réclamation auprès de la <a href="https://www.cnil.fr" className="text-orange-400 hover:underline" target="_blank" rel="noopener noreferrer">CNIL</a>.</p>
         </section>
       </div>

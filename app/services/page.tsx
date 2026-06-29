@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Nos services de dépannage auto — Remorquage, Batterie, Pneu...",
   description:
     "Remorquage, dépannage sur place, batterie à plat, crevaison, transport de véhicule. SM Dépannage intervient 24h/24 à Lille et dans le 59/62.",
-  alternates: { canonical: "https://votredomaine.fr/services" },
+  alternates: { canonical: "https://depannage-lille.vercel.app/services" },
 };
 
 export default function ServicesPage() {

@@ -7,7 +7,7 @@ import PageHeader from "@/components/PageHeader";
 export const metadata: Metadata = {
   title: "Mentions légales — SM Dépannage",
   description: "Mentions légales du site SM Dépannage : éditeur, hébergeur, propriété intellectuelle.",
-  alternates: { canonical: "https://votredomaine.fr/mentions-legales" },
+  alternates: { canonical: "https://depannage-lille.vercel.app/mentions-legales" },
   robots: { index: false },
 };
 
@@ -26,8 +26,8 @@ export default function MentionsLegalesPage() {
             <li><strong>Forme juridique :</strong> [SARL / SAS / Auto-entrepreneur]</li>
             <li><strong>SIRET :</strong> [À compléter]</li>
             <li><strong>Adresse :</strong> [À compléter]</li>
-            <li><strong>Téléphone :</strong> +33 X XX XX XX XX</li>
-            <li><strong>Email :</strong> contact@votredomaine.fr</li>
+            <li><strong>Téléphone :</strong> 07 67 87 80 34</li>
+            <li><strong>Email :</strong> [À compléter]</li>
           </ul>
         </section>
 

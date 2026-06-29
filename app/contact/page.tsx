@@ -7,8 +7,8 @@ import PageHeader from "@/components/PageHeader";
 export const metadata: Metadata = {
   title: "Contact — Demande d'intervention dépannage auto Lille",
   description:
-    "Contactez SM Dépannage pour une intervention rapide à Lille et dans le Nord–Pas-de-Calais. Ou appelez directement le +33 X XX XX XX XX.",
-  alternates: { canonical: "https://votredomaine.fr/contact" },
+    "Contactez SM Dépannage pour une intervention rapide à Lille et dans le Nord–Pas-de-Calais. Ou appelez directement le 07 67 87 80 34.",
+  alternates: { canonical: "https://depannage-lille.vercel.app/contact" },
 };
 
 const PHONE = "07 67 87 80 34";
@@ -38,7 +38,7 @@ export default function ContactPage() {
               <div aria-hidden className="absolute -top-12 right-0 h-40 w-40 rounded-full bg-sm-red-500/25 blur-3xl" />
               <h2 className="relative text-white/75 font-semibold text-sm uppercase tracking-[0.2em] mb-2">Urgence ? Appelez</h2>
               <a href={`tel:${PHONE}`} className="relative font-display text-gradient text-3xl sm:text-4xl font-extrabold">
-                +33 X XX XX XX XX
+                07 67 87 80 34
               </a>
               <p className="relative text-white/60 text-sm mt-3">24h/24 — 7j/7 — Réponse immédiate</p>
             </div>

@@ -66,8 +66,33 @@ export function HeroGeometric() {
 
   return (
     <div className="relative min-h-[100svh] w-full flex items-center justify-center overflow-hidden bg-[#030303]">
-      {/* Voile coloré de fond (rouge ↔ bleu) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-red-600/[0.06] via-transparent to-blue-600/[0.06] blur-3xl" />
+      {/* Image de fond : autoroute de nuit (thème route + vitesse) */}
+      <div className="absolute inset-0">
+        <img
+          src="/road-night.jpg"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover"
+        />
+        {/* Voile sombre dégradé — garde le logo et le texte parfaitement lisibles */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(3,3,3,0.82) 0%, rgba(3,3,3,0.50) 42%, rgba(3,3,3,0.72) 78%, #030303 100%)",
+          }}
+        />
+        {/* Vignette : fond les contours dans le noir */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 85% 75% at 50% 45%, transparent 0%, rgba(3,3,3,0.68) 100%)",
+          }}
+        />
+        {/* Teinte de marque rouge ↔ bleu par-dessus l'image */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-900/25 via-transparent to-blue-900/20" />
+      </div>
 
       {/* Grille discrète */}
       <div
@@ -221,6 +246,10 @@ export function HeroGeometric() {
           </motion.div>
         </div>
       </div>
+
+      {/* Liserés néon sur les contours haut/bas */}
+      <div className="absolute top-0 inset-x-0 h-px pointer-events-none" style={{ background: "linear-gradient(90deg,transparent,rgba(239,68,68,0.7),transparent)" }} />
+      <div className="absolute bottom-0 inset-x-0 h-px pointer-events-none" style={{ background: "linear-gradient(90deg,transparent,rgba(59,130,246,0.6),transparent)" }} />
 
       {/* Dégradé haut/bas pour fondu */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-[#030303]/80 pointer-events-none" />

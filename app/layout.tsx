@@ -10,6 +10,7 @@ import Logo from "@/components/Logo";
 import { Header } from "@/components/Header";
 import ChatWidget from "@/components/ChatWidget";
 import GhostCursor from "@/components/GhostCursor";
+import StartupSound from "@/components/StartupSound";
 
 const StarsCanvas = dynamic(
   () => import("@/components/ui/StarsCanvas").then((m) => ({ default: m.StarsCanvas })),
@@ -137,7 +138,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="font-sans text-white antialiased">
-        <GhostCursor trailLength={35} inertia={0.25} grainIntensity={0.01} bloomStrength={0.1} bloomRadius={1} brightness={1.2} color="#6c00d0" edgeIntensity={0} />
+        <GhostCursor trailLength={20} inertia={0.3} grainIntensity={0.05} bloomStrength={0.1} bloomRadius={1} brightness={2} color="#fc0000" edgeIntensity={0} />
+        <StartupSound src="/panne.mp3" volume={0.5} />
         <StarsCanvas />
         <Header />
 

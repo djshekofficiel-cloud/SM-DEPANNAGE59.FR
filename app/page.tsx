@@ -1,7 +1,7 @@
 // app/page.tsx — Page d'accueil
 
 import type { Metadata } from "next";
-import { HeroPremium } from "@/components/HeroPremium";
+import { HeroNeon } from "@/components/HeroNeon";
 import ServiceCard from "@/components/ServiceCard";
 import Link from "next/link";
 import { villes } from "@/lib/villes";
@@ -55,7 +55,7 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroPremium />
+      <HeroNeon />
 
       {/* BARRE DE CONFIANCE */}
       <section className="border-y border-white/10 bg-ink-900/45">

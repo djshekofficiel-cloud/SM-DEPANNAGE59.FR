@@ -29,6 +29,7 @@ export default function ChatWidget() {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([{ role: 'assistant', content: WELCOME }]);
   const [questionnaireSent, setQuestionnaireSent] = useState(false);
+  const [isQuestionnaireComplete, setIsQuestionnaireComplete] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,6 +40,24 @@ export default function ChatWidget() {
   useEffect(() => {
     if (open) inputRef.current?.focus();
   }, [open]);
+
+  // Détecter si le questionnaire est complet (3+ messages utilisateur)
+  useEffect(() => {
+    const userMessages = messages.filter((m) => m.role === 'user');
+    const isComplete = userMessages.length >= 3 && !questionnaireSent;
+    setIsQuestionnaireComplete(isComplete);
+
+    // Si complet et pas encore suggéré, afficher un message
+    if (isComplete && !messages.some((m) => m.content.includes('Envoyer par WhatsApp'))) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: `✅ Parfait! J'ai toutes les infos.\n\n👇 Cliquez sur "Envoyer par WhatsApp" ci-dessous pour m'envoyer votre demande. Je vous répondrai directement!`,
+        },
+      ]);
+    }
+  }, [messages, questionnaireSent]);
 
   async function send(forced?: string) {
     const text = (forced ?? input).trim();
@@ -335,12 +354,14 @@ export default function ChatWidget() {
 
           {/* Saisie */}
           <div className="px-3 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            {/* Bouton envoyer par WhatsApp si questionnaire commencé */}
+            {/* Bouton envoyer par WhatsApp avec animation si questionnaire complet */}
             {messages.length > 1 && !questionnaireSent && (
               <button
                 onClick={sendChatInfoToWhatsApp}
                 disabled={loading}
-                className="w-full mb-2 text-xs px-3 py-2 rounded-lg font-semibold text-white transition-all disabled:opacity-50"
+                className={`w-full mb-2 text-xs px-3 py-2 rounded-lg font-semibold text-white transition-all disabled:opacity-50 ${
+                  isQuestionnaireComplete ? 'whatsapp-pulse' : ''
+                }`}
                 style={{
                   background: 'linear-gradient(135deg,#25D366,#128C7E)',
                   border: '1px solid rgba(37,211,102,0.4)',

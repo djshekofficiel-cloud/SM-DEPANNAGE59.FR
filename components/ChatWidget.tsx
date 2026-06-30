@@ -124,27 +124,32 @@ export default function ChatWidget() {
 
       const fullMessage = `📋 *Nouvelle demande du chatbot SM Dépannage*\n\n${chatSummary}\n\n---\nDate: ${new Date().toLocaleString('fr-FR')}`;
 
-      // Envoyer via CallMeBot API
-      const response = await fetch(
-        `https://api.callmebot.com/whatsapp.php?phone=${PHONE_INTL}&text=${encodeURIComponent(fullMessage)}&apikey=${process.env.NEXT_PUBLIC_CALLMEBOT_APIKEY || process.env.CALLMEBOT_APIKEY}`,
-        { method: 'GET' }
-      );
+      // Envoyer via API route serveur (sécurisé)
+      const response = await fetch('/api/send-whatsapp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: fullMessage }),
+      });
 
-      if (response.ok) {
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok && data.success) {
         setQuestionnaireSent(true);
         pushAssistant(
           `✅ Vos infos ont été envoyées par WhatsApp à ${PHONE}. Nous vous répondrons rapidement!`
         );
       } else {
+        const errorMsg = data.error || 'Erreur inconnue';
+        console.error('WhatsApp error:', errorMsg);
         pushAssistant(
-          `Erreur d'envoi. Appelez-nous directement au ${PHONE}.`
+          `⚠️ Erreur d'envoi: ${errorMsg}\n\nVeuillez appeler directement au ${PHONE}.`
         );
       }
     } catch (error) {
-      pushAssistant(
-        `Erreur d'envoi. Appelez-nous directement au ${PHONE}.`
-      );
       console.error('WhatsApp send error:', error);
+      pushAssistant(
+        `Erreur de connexion. Appelez-nous directement au ${PHONE}.`
+      );
     }
   }
 

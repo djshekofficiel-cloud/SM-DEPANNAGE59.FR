@@ -35,43 +35,33 @@ export default function HomePage() {
       <HeroGeometric />
 
       {/* ── SECTION SERVICES ── */}
-      <section className="py-16 sm:py-24 bg-gradient-to-b from-black via-slate-950 to-black border-t border-red-500/20">
+      <section className="py-12 sm:py-16 bg-black border-t border-red-500/10">
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-          <div className="text-center mb-10 sm:mb-16">
-            <span className="inline-block px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold tracking-widest uppercase text-red-300 border border-red-500/40 bg-red-950/20 mb-4">
-              Nos prestations
-            </span>
-            <h2 className="font-black text-white mb-4 leading-none"
-              style={{ fontSize: 'clamp(2rem,6vw,4rem)' }}>
+          <div className="mb-6 sm:mb-8">
+            <h2 className="font-black text-white leading-none" style={{ fontSize: 'clamp(1.5rem,4vw,2.5rem)' }}>
               Nos&nbsp;
               <span style={{
                 background: 'linear-gradient(90deg,#ef4444,#dc2626)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                filter: 'drop-shadow(0 0 12px rgba(220,38,38,0.6))',
               }}>services</span>
             </h2>
-            <p className="text-slate-300 mx-auto" style={{ fontSize: 'clamp(0.95rem,2.5vw,1.15rem)', maxWidth: 560 }}>
-              Dépannage complet et rapide pour tous vos besoins automobiles
-            </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-3">
             {SERVICES.map((s, i) => (
               <div
                 key={i}
-                className="group relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:bg-white/5 border border-white/5 hover:border-red-500/30"
-                style={{ animation: `fade-in 0.4s ease-out ${i * 0.05}s both` }}
+                className="group px-2.5 py-2 transition-all duration-200 hover:bg-red-500/8"
+                style={{ animation: `fade-in 0.3s ease-out ${i * 0.04}s both` }}
               >
-                <div className="relative z-10 text-center">
-                  <h3 className="font-semibold text-white text-xs sm:text-sm leading-tight mb-1">
-                    {s.title}
-                  </h3>
-                  <p className="text-slate-400 text-[10px] sm:text-xs leading-relaxed">
-                    {s.desc}
-                  </p>
-                </div>
+                <h3 className="font-medium text-white text-xs sm:text-sm leading-tight">
+                  {s.title}
+                </h3>
+                <p className="text-slate-400 text-[11px] sm:text-xs leading-relaxed mt-0.5">
+                  {s.desc}
+                </p>
               </div>
             ))}
           </div>

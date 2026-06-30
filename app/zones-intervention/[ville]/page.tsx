@@ -2,6 +2,7 @@
 
 import type { Metadata } from 'next';
 import { villes } from '@/lib/villes';
+import { services } from '@/lib/services';
 import { SITE_URL, canonical } from '@/lib/site';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -112,6 +113,8 @@ export default function VillePage({ params }: Props) {
             </div>
           </div>
 
+          <p className="text-slate-300 text-lg leading-relaxed mb-10">{v.description}</p>
+
           <h2 className="text-3xl font-black text-white neon-title mb-6">Zones desservies à {v.nom}</h2>
           <div className="bg-slate-900/30 border border-slate-800 rounded-lg p-8 mb-8">
             <p className="text-slate-300 text-lg mb-4">
@@ -126,19 +129,18 @@ export default function VillePage({ params }: Props) {
 
           <h2 className="text-3xl font-black text-white neon-title mb-6">Services disponibles à {v.nom}</h2>
           <div className="grid md:grid-cols-2 gap-4 mb-8">
-            {[
-              { icon: '🚗', title: 'Remorquage', desc: 'Transport sécurisé de votre véhicule' },
-              { icon: '🔧', title: 'Dépannage sur place', desc: 'Réparation immédiate si possible' },
-              { icon: '🔋', title: 'Batterie', desc: 'Changement et recharge 24/7' },
-              { icon: '⚙️', title: 'Crevaison', desc: 'Réparation rapide de pneu' },
-              { icon: '📍', title: 'Rapatriement', desc: 'Assistance routière complète' },
-              { icon: '✓', title: 'Urgence', desc: 'Intervention immédiate garantie' },
-            ].map((service, i) => (
-              <div key={i} className="p-4 bg-slate-900/30 border border-slate-800 rounded-lg">
+            {services.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="p-4 bg-slate-900/30 border border-slate-800 rounded-lg hover:border-red-500/50 hover:bg-red-950/20 transition-all group"
+              >
                 <div className="text-3xl mb-2">{service.icon}</div>
-                <h3 className="font-bold text-white neon-title mb-1">{service.title}</h3>
-                <p className="text-slate-300 text-sm">{service.desc}</p>
-              </div>
+                <h3 className="font-bold text-white neon-title mb-1 group-hover:text-red-400 transition-colors">
+                  {service.nom} à {v.nom}
+                </h3>
+                <p className="text-slate-300 text-sm">{service.resume}</p>
+              </Link>
             ))}
           </div>
         </div>

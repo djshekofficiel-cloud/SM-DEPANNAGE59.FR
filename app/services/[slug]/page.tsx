@@ -4,8 +4,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { services, getServiceBySlug } from "@/lib/services";
+import { villes } from "@/lib/villes";
 import { serviceImage } from "@/lib/images";
-import { canonical } from "@/lib/site";
+import { SITE_URL, canonical } from "@/lib/site";
 
 interface PageProps {
   params: { slug: string };
@@ -31,8 +32,36 @@ export default function ServicePage({ params }: PageProps) {
   const s = getServiceBySlug(params.slug);
   if (!s) notFound();
 
+  const path = `/services/${s.slug}`;
+  const serviceLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: s.nom,
+    serviceType: s.nom,
+    description: s.description,
+    url: canonical(path),
+    provider: { "@type": "AutoRepair", name: "SM Dépannage", telephone: PHONE, url: SITE_URL },
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Nord (59)" },
+      { "@type": "AdministrativeArea", name: "Pas-de-Calais (62)" },
+    ],
+  };
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${SITE_URL}/services` },
+      { "@type": "ListItem", position: 3, name: s.nom, item: canonical(path) },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceLd, breadcrumbLd]) }}
+      />
       {/* HERO SERVICE avec image */}
       <section className="relative overflow-hidden border-b border-white/10">
         <div className="absolute inset-0 -z-10">
@@ -87,6 +116,22 @@ export default function ServicePage({ params }: PageProps) {
                   {other.nom}
                 </Link>
               ))}
+          </div>
+        </div>
+
+        {/* Maillage : ce service dans les villes */}
+        <div className="mt-12">
+          <h2 className="font-display text-xl font-bold text-white neon-title mb-4">{s.nom} dans votre ville</h2>
+          <div className="flex flex-wrap gap-3">
+            {villes.slice(0, 10).map((v) => (
+              <Link
+                key={v.slug}
+                href={`/zones-intervention/${v.slug}`}
+                className="glass rounded-full text-white/85 hover:text-ember-300 text-sm px-4 py-2 transition-colors"
+              >
+                {s.nom} {v.nom}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

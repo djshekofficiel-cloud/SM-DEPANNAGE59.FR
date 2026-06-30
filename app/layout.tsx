@@ -53,6 +53,7 @@ export const metadata: Metadata = {
     "urgence automobile",
   ],
   alternates: { canonical: SITE_URL },
+  robots: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large", "max-video-preview": -1 },
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -61,16 +62,16 @@ export const metadata: Metadata = {
     description:
       "Dépannage et remorquage auto rapide à Lille et dans le Nord–Pas-de-Calais. Disponible 24h/24, 7j/7.",
     url: SITE_URL,
-    // Vignette générée par app/opengraph-image.tsx (toujours à jour).
   },
   twitter: {
     card: "summary_large_image",
     title: "Dépannage auto Lille & Métropole 24h/24 — SM Dépannage",
     description: "Remorquage, batterie, pneu, panne moteur. Intervention 20–30 min, 24h/24 sur Lille, 59 & 62.",
+    creator: "@smdepannage",
   },
   icons: { icon: "/favicon.ico" },
   appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "SM Dépannage" },
-  formatDetection: { telephone: true },
+  formatDetection: { telephone: true, email: false, address: false },
   verification: { google: "QAI52SSKw7QKZLRk-2w_dP8y-H8DeJok9jOuyVV3xAU" },
   viewport: {
     width: "device-width",
@@ -78,40 +79,66 @@ export const metadata: Metadata = {
     maximumScale: 5,
     userScalable: true,
   },
+  creator: "SM Dépannage",
 };
 
 // ─── Données structurées JSON-LD ─────────────────────────────────────────────
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["AutoRepair", "EmergencyService"],
+  "@type": ["LocalBusiness", "AutoRepair", "EmergencyService"],
+  "@id": SITE_URL,
   name: "SM Dépannage",
-  image: `${SITE_URL}/og.png`,
+  description:
+    "Service de dépannage et remorquage automobile 24h/24, 7j/7 à Lille et dans toute la Métropole Européenne. Intervention rapide 20-30 minutes.",
+  image: `${SITE_URL}/opengraph-image`,
   telephone: "07 67 87 80 34",
   priceRange: "€€",
   url: SITE_URL,
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "Customer Support",
+    telephone: "07 67 87 80 34",
+    availableLanguage: ["fr"],
+    contactOption: "TollFree",
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: "Lille",
     addressLocality: "Lille",
     postalCode: "59000",
+    addressRegion: "Nord",
     addressCountry: "FR",
   },
+  sameAs: [
+    "https://www.facebook.com/smdepannage",
+    "https://www.instagram.com/smdepannage",
+    "https://wa.me/33767878034",
+  ],
   areaServed: [
     { "@type": "City", name: "Lille" },
     { "@type": "City", name: "Roubaix" },
     { "@type": "City", name: "Tourcoing" },
     { "@type": "City", name: "Villeneuve-d'Ascq" },
     { "@type": "City", name: "Lens" },
+    { "@type": "City", name: "Liévin" },
     { "@type": "City", name: "Béthune" },
     { "@type": "City", name: "Arras" },
-    { "@type": "AdministrativeArea", name: "Nord" },
-    { "@type": "AdministrativeArea", name: "Pas-de-Calais" },
+    { "@type": "City", name: "Douai" },
+    { "@type": "AdministrativeArea", name: "Nord (59)" },
+    { "@type": "AdministrativeArea", name: "Pas-de-Calais (62)" },
   ],
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     opens: "00:00",
     closes: "23:59",
+  },
+  serviceType: ["Auto Repair", "Towing Service", "Roadside Assistance", "Emergency Service"],
+  offers: {
+    "@type": "AggregateOffer",
+    priceCurrency: "EUR",
+    lowPrice: "0",
+    highPrice: "999",
   },
   geo: { "@type": "GeoCoordinates", latitude: 50.6292, longitude: 3.0573 },
 };
@@ -132,9 +159,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
+        <meta name="msapplication-TileColor" content="#dc2626" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        <meta property="og:type" content="business.business" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {/* Google Analytics 4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XXXXXXXXXX', {
+                page_path: window.location.pathname,
+                anonymize_ip: true,
+              });
+            `,
+          }}
         />
       </head>
       <body className="font-sans text-white antialiased">

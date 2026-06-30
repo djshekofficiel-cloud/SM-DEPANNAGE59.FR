@@ -13,6 +13,7 @@ interface PageProps {
 }
 
 const PHONE = "07 67 87 80 34";
+const WHATSAPP_LINK = `https://wa.me/33767878034?text=${encodeURIComponent("Bonjour, j'ai besoin d'un dépannage. Pouvez-vous m'aider ?")}`;
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -83,7 +84,7 @@ export default function ServicePage({ params }: PageProps) {
           <p className="text-white/65 text-lg mt-5 max-w-2xl text-pretty">{s.description}</p>
           <div className="mt-8 flex flex-col sm:flex-row gap-4">
             <a href={`tel:${PHONE}`} className="btn-primary text-lg">Appeler maintenant</a>
-            <Link href="/contact" className="btn-ghost text-lg">Demander un devis</Link>
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-ghost text-lg">📲 WhatsApp</a>
           </div>
         </div>
       </section>
@@ -101,7 +102,7 @@ export default function ServicePage({ params }: PageProps) {
           <p className="relative text-white/75 mb-6"><span className="available-green font-semibold">Disponible 24h/24, 7j/7.</span> Intervention en 20 à 30 min sur Lille et la MEL.</p>
           <div className="relative flex flex-col sm:flex-row gap-4">
             <a href={`tel:${PHONE}`} className="btn-primary text-lg">Appeler maintenant</a>
-            <Link href="/contact" className="btn-ghost text-lg">Envoyer une demande</Link>
+            <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="btn-ghost text-lg">📲 Demander par WhatsApp</a>
           </div>
         </div>
 

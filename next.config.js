@@ -80,8 +80,8 @@ const nextConfig = {
   // ── Variables publiques (non sensibles) ───────────────────────────────────
   // Les secrets (RESEND_API_KEY, etc.) restent dans .env.local côté serveur
   env: {
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://votredomaine.fr",
-    NEXT_PUBLIC_PHONE: process.env.NEXT_PUBLIC_PHONE || "+33XXXXXXXXX",
+    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || "https://www.sm-depannage59.fr",
+    NEXT_PUBLIC_PHONE: process.env.NEXT_PUBLIC_PHONE || "+33767878034",
   },
 };
 

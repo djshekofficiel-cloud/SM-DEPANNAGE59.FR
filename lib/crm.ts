@@ -1,6 +1,6 @@
 // lib/crm.ts — Création d'une demande d'intervention (CRM ou email)
 
-import { sendInterventionEmail } from "@/lib/notify";
+import { sendInterventionEmail, sendInterventionWhatsApp } from "@/lib/notify";
 
 export interface InterventionInput {
   nom: string;
@@ -66,6 +66,9 @@ async function pushToCrm(
 export async function createIntervention(input: InterventionInput): Promise<InterventionResult> {
   const ref = makeRef();
 
+  // Notification WhatsApp au gérant (best-effort, ne conditionne pas le succès).
+  await sendInterventionWhatsApp({ ref, ...input, source: "chatbot" }).catch(() => {});
+
   const crmResult = await pushToCrm(ref, input);
   if (crmResult?.success) return crmResult;
 
@@ -87,15 +90,17 @@ export async function notifyContactForm(data: {
   message?: string;
 }): Promise<boolean> {
   const ref = makeRef();
-  return sendInterventionEmail({
+  const payload = {
     ref,
-    source: "formulaire",
+    source: "formulaire" as const,
     nom: data.nom,
     telephone: data.tel,
     localisation: data.lieu,
     type_probleme: mapTypePanne(data.typePanne),
     details: data.message,
-  });
+  };
+  await sendInterventionWhatsApp(payload).catch(() => {});
+  return sendInterventionEmail(payload);
 }
 
 function mapTypePanne(type: string): InterventionInput["type_probleme"] {

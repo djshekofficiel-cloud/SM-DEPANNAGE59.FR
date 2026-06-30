@@ -74,3 +74,59 @@ export async function sendInterventionEmail(
 
   return true;
 }
+
+// Convertit un numéro FR en format wa.me (international, sans + ni espaces).
+function toWaNumber(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.startsWith("33")) return digits;
+  if (digits.startsWith("0")) return "33" + digits.slice(1);
+  return digits;
+}
+
+/**
+ * Notifie le gérant par WhatsApp via CallMeBot (best-effort).
+ * Le message contient un lien wa.me 1-clic vers le numéro du client.
+ */
+export async function sendInterventionWhatsApp(
+  data: InterventionNotification,
+): Promise<boolean> {
+  const phone = process.env.CALLMEBOT_PHONE; // numéro WhatsApp du gérant (international)
+  const apikey = process.env.CALLMEBOT_APIKEY;
+
+  if (!phone || !apikey) {
+    console.log("[DEV] WhatsApp non envoyé (CallMeBot non configuré):", data.ref);
+    return false;
+  }
+
+  const wa = toWaNumber(sanitize(data.telephone));
+  const lines = [
+    `🚗 Nouvelle demande ${data.ref}`,
+    `Type : ${data.type_probleme}${data.urgence ? " ⚠️ URGENT" : ""}`,
+    `Nom : ${sanitize(data.nom)}`,
+    `Tél : ${sanitize(data.telephone)}`,
+    `Lieu : ${sanitize(data.localisation)}`,
+    ...(data.vehicule ? [`Véhicule : ${sanitize(data.vehicule)}`] : []),
+    ...(data.date_souhaitee ? [`Créneau : ${sanitize(data.date_souhaitee)}`] : []),
+    ...(data.details ? [`Détails : ${sanitize(data.details)}`] : []),
+    `Source : ${data.source}`,
+    ``,
+    `➡️ Répondre au client : https://wa.me/${wa}`,
+  ];
+
+  const url =
+    `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(phone)}` +
+    `&text=${encodeURIComponent(lines.join("\n"))}` +
+    `&apikey=${encodeURIComponent(apikey)}`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      console.error("[CallMeBot]", res.status, await res.text().catch(() => ""));
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.error("[CallMeBot]", err);
+    return false;
+  }
+}

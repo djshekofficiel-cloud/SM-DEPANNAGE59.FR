@@ -9,8 +9,6 @@ interface Msg {
 }
 
 const PHONE = '07 67 87 80 34';
-const PHONE_INTL = '33767878034';
-// Numéro WhatsApp pro au format international (07 67 87 80 34 → 33767878034).
 const WHATSAPP_LINK =
   'https://wa.me/33767878034?text=' +
   encodeURIComponent('Bonjour, j\'ai besoin d\'un dépannage. Voici ma situation : ');

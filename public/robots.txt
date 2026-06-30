@@ -1,0 +1,28 @@
+# Robots.txt — SEO optimisé pour SM Dépannage
+
+User-agent: *
+Allow: /
+Allow: /*.js
+Allow: /*.css
+Allow: /*.json
+Allow: /sitemap.xml
+Allow: /sitemap-pages.xml
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /*?*
+Crawl-delay: 1
+Request-rate: 1/1s
+
+Sitemap: https://www.sm-depannage59.fr/sitemap.xml
+Sitemap: https://www.sm-depannage59.fr/sitemap-pages.xml
+
+# Google-specific rules
+User-agent: Googlebot
+Allow: /
+Request-rate: 5/1s
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Request-rate: 2/1s

@@ -1,33 +1,35 @@
 {
-  "name": "SM Dépannage — Dépannage auto Lille",
+  "name": "SM Dépannage — Dépannage auto Lille 24h/24",
   "short_name": "SM Dépannage",
-  "description": "Service de dépannage et remorquage auto à Lille, Roubaix, Tourcoing et toute la MEL. Intervention 24h/24, 7j/7.",
+  "description": "Service de dépannage et remorquage automobile 24h/24 à Lille et la Métropole. Intervention rapide 20-30 min.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#dc2626",
   "orientation": "portrait-primary",
-  "scope": "/",
   "icons": [
     {
       "src": "/favicon.png",
-      "sizes": "256x256",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "/favicon.png",
-      "sizes": "256x256",
+      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any"
     }
   ],
-  "categories": ["automotive", "services"],
-  "screenshots": [
+  "categories": ["automotive", "business", "emergency"],
+  "shortcuts": [
     {
-      "src": "/og.png",
-      "sizes": "1200x630",
-      "type": "image/png"
+      "name": "Appeler SM Dépannage",
+      "short_name": "Appeler",
+      "description": "Appeler directement SM Dépannage",
+      "url": "tel:+33767878034",
+      "icons": [{ "src": "/favicon.png", "sizes": "192x192" }]
     }
   ]
 }

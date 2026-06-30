@@ -1,0 +1,14 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//SM Dépannage 59//NONSGML v1.0//EN
+FN:SM Dépannage 59
+N:Dépannage;SM;;;
+ORG:SM Dépannage
+TEL;TYPE=CELL:+33 7 67 87 80 34
+TEL;TYPE=WORK:+33 7 67 87 80 34
+EMAIL:contact@smdepannage59.fr
+URL:https://www.sm-depannage59.fr
+ADR;TYPE=WORK:;;105 Rue Delannoy;;59160;Lille;France
+NOTE:Dépannage auto & moto 24h/24 · 7j/7\n\nServices :\n• Remorquage\n• Dépannage sur place\n• Batterie\n• Crevaison/Pneu\n• Panne moteur\n• Transport véhicule\n• Assistance routière\n\nZones : Lille, Roubaix, Tourcoing et alentours (59/62)\nIntervention : 20-30 min
+CATEGORIES:Dépannage,Auto,Urgence,Service
+END:VCARD

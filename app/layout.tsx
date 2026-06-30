@@ -280,8 +280,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </div>
             </div>
 
-            <div className="mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/40">
-              © {new Date().getFullYear()} SM Dépannage — Tous droits réservés — Région Nord–Pas-de-Calais
+            <div className="mt-12 pt-6 border-t border-white/10">
+              <div className="text-center text-xs text-white/40 mb-3">
+                © {new Date().getFullYear()} SM Dépannage — Tous droits réservés — Région Nord–Pas-de-Calais
+              </div>
+              <div className="text-center text-xs text-white/50">
+                Site conçu et développé par{' '}
+                <a
+                  href="https://pixnord.fr"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm-red-400 hover:text-sm-red-300 transition-colors font-semibold"
+                >
+                  Pixnord
+                </a>
+              </div>
             </div>
           </div>
         </footer>

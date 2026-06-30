@@ -407,6 +407,17 @@ body {
   text-shadow: 0 0 8px rgba(74,222,128,0.5);
 }
 
+/* Animation clignotement WhatsApp */
+@keyframes pulse-blink {
+  0%, 49% { opacity: 1; transform: scale(1); }
+  50%, 100% { opacity: 0.5; transform: scale(1.02); }
+}
+
+.whatsapp-pulse {
+  animation: pulse-blink 0.8s ease-in-out infinite;
+  box-shadow: 0 0 16px rgba(37,211,102,0.6), 0 0 32px rgba(37,211,102,0.3);
+}
+
 /* Respect des préférences de mouvement réduit */
 @media (prefers-reduced-motion: reduce) {
   *,

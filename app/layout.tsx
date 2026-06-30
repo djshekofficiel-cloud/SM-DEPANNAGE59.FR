@@ -190,10 +190,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StarsCanvas />
         <Header />
 
-        {/* ── BANDEAU URGENCE (lisible, non-marquee) ─────────────────── */}
+        {/* ── BANDEAU URGENCE (vert pulsant — statut actif) ────────────── */}
         <div className="border-b border-white/10 bg-ink-900/85">
           <div className="container-x py-2.5 text-xs sm:text-sm text-white/75 flex flex-wrap items-center gap-x-5 gap-y-1">
-            <span className="text-sm-red-300 font-semibold">Disponible 24h/24 · 7j/7</span>
+            <span className="flex items-center gap-2 text-emerald-400 font-semibold">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 animate-pulse" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-300" />
+              </span>
+              Disponible 24h/24 · 7j/7
+            </span>
             <span>Intervention 20 à 30 min sur Lille</span>
             <span>Tarif annoncé avant intervention</span>
           </div>

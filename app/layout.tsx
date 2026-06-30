@@ -9,13 +9,14 @@ import CallButton from "@/components/CallButton";
 import Logo from "@/components/Logo";
 import { Header } from "@/components/Header";
 import ChatWidget from "@/components/ChatWidget";
-import SplashCursor from "@/components/SplashCursor";
-import StartupSound from "@/components/StartupSound";
 
 const StarsCanvas = dynamic(
   () => import("@/components/ui/StarsCanvas").then((m) => ({ default: m.StarsCanvas })),
   { ssr: false }
 );
+
+// Effet fluide WebGL différé (hors rendu initial) — gain de performance mobile.
+const SplashCursor = dynamic(() => import("@/components/SplashCursor"), { ssr: false });
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const sora = Sora({
@@ -137,7 +138,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans text-white antialiased">
         <SplashCursor SIM_RESOLUTION={128} DYE_RESOLUTION={1440} DENSITY_DISSIPATION={3.5} VELOCITY_DISSIPATION={2} PRESSURE={0.1} CURL={3} SPLAT_RADIUS={0.2} SPLAT_FORCE={6000} COLOR_UPDATE_SPEED={10} />
-        <StartupSound src="/panne.mp3" volume={0.5} />
         <StarsCanvas />
         <Header />
 

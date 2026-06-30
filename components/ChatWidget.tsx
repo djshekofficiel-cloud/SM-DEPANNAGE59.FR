@@ -223,28 +223,33 @@ export default function ChatWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? 'Fermer le chat' : 'Ouvrir le chat'}
         aria-expanded={open}
-        className="fixed z-[100] bottom-5 right-5 flex items-center justify-center rounded-full text-white sm:hover:scale-110"
+        className="fixed z-[100] bottom-6 right-6 flex items-center justify-center rounded-full text-white transition-all duration-300 ease-out"
         style={{
-          width: 56,
-          height: 56,
-          background: 'linear-gradient(135deg,#dc2626,#b91c1c)',
-          boxShadow: '0 0 28px rgba(220,38,38,0.55), 0 6px 20px rgba(0,0,0,0.4)',
-          border: '1px solid rgba(239,68,68,0.5)',
-          transition: 'transform .2s',
-          minWidth: 56,
-          minHeight: 56,
+          width: 64,
+          height: 64,
+          background: 'linear-gradient(135deg,#ef4444,#dc2626)',
+          boxShadow: '0 4px 20px rgba(239,68,68,0.4), 0 8px 32px rgba(0,0,0,0.3)',
+          border: '2px solid rgba(255,255,255,0.2)',
+          minWidth: 64,
+          minHeight: 64,
         }}
         onMouseEnter={(e) => {
-          if (window.innerWidth >= 640) e.currentTarget.style.transform = 'scale(1.08)';
+          if (window.innerWidth >= 640) {
+            e.currentTarget.style.transform = 'scale(1.12)';
+            e.currentTarget.style.boxShadow = '0 6px 28px rgba(239,68,68,0.5), 0 12px 40px rgba(0,0,0,0.4)';
+          }
         }}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.boxShadow = '0 4px 20px rgba(239,68,68,0.4), 0 8px 32px rgba(0,0,0,0.3)';
+        }}
       >
         {open ? (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
             <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         ) : (
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.1.9 4 2.4 5.5L3 21l4.3-1.3c1.4.5 2.9.8 4.7.8 5.5 0 10-3.8 10-8.5S17.5 3 12 3z" />
           </svg>
         )}
@@ -253,29 +258,31 @@ export default function ChatWidget() {
       {/* Fenêtre de chat */}
       {open && (
         <div
-          className="fixed z-[100] bottom-5 right-5 flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl"
+          className="fixed z-[100] bottom-6 right-6 flex flex-col overflow-hidden transition-all duration-300 ease-out animate-slide-up"
           style={{
-            width: 'min(400px, calc(100vw - 2rem))',
-            height: 'min(580px, calc(100vh - 100px))',
-            background: 'linear-gradient(180deg,#0a0a14,#05050c)',
-            border: '1px solid rgba(239,68,68,0.3)',
-            boxShadow: '0 0 40px rgba(220,38,38,0.25), 0 12px 40px rgba(0,0,0,0.6)',
+            width: 'min(480px, calc(100vw - 1.5rem))',
+            height: 'min(700px, calc(100vh - 8rem))',
+            background: 'linear-gradient(135deg,rgba(15,23,42,0.85) 0%,rgba(10,15,30,0.9) 100%)',
+            backdropFilter: 'blur(12px)',
+            borderRadius: 'clamp(12px, 3vw, 24px)',
+            border: '1.5px solid rgba(239,68,68,0.2)',
+            boxShadow: '0 8px 32px rgba(239,68,68,0.2), 0 16px 64px rgba(0,0,0,0.4)',
           }}
         >
           {/* En-tête */}
           <div
-            className="flex items-center gap-2 px-3.5 py-2.5 sm:gap-3 sm:px-4 sm:py-3"
-            style={{ background: 'rgba(220,38,38,0.08)', borderBottom: '1px solid rgba(239,68,68,0.2)' }}
+            className="flex items-center gap-2.5 px-4 py-3.5 sm:gap-3 sm:px-5 sm:py-4 backdrop-blur-sm border-b border-white/10"
+            style={{ background: 'linear-gradient(90deg,rgba(239,68,68,0.08),rgba(239,68,68,0.04))' }}
           >
-            <span className="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 flex-shrink-0">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-              <span className="relative inline-flex h-full w-full rounded-full bg-green-500" />
+            <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-pulse" style={{ boxShadow: '0 0 12px rgba(52,211,153,0.6)' }} />
+              <span className="relative inline-flex h-full w-full rounded-full bg-emerald-300" />
             </span>
             <div className="flex-1 min-w-0">
-              <div className="font-bold text-white text-xs sm:text-sm leading-tight truncate" style={{ textShadow: '0 0 12px rgba(239,68,68,0.5)' }}>
-                <span className="text-red-500" style={{ textShadow: '0 0 14px rgba(239,68,68,0.9), 0 0 28px rgba(239,68,68,0.5)' }}>SM</span> Dépannage
+              <div className="font-bold text-white text-sm sm:text-base leading-tight truncate">
+                <span className="text-red-400">SM</span> Dépannage
               </div>
-              <div className="text-[10px] sm:text-[11px] text-slate-300 truncate">En ligne · quelques secondes</div>
+              <div className="text-xs sm:text-sm text-slate-400 truncate">En ligne · répond maintenant</div>
             </div>
             <a
               href={WHATSAPP_LINK}
@@ -283,32 +290,43 @@ export default function ChatWidget() {
               rel="noopener noreferrer"
               aria-label="Continuer sur WhatsApp"
               title="Continuer sur WhatsApp"
-              className="flex items-center justify-center rounded text-white flex-shrink-0"
-              style={{ width: 28, height: 28, background: '#25D366', minWidth: 28 }}
+              className="flex items-center justify-center rounded-lg text-white flex-shrink-0 transition-all duration-200 hover:scale-110"
+              style={{ width: 32, height: 32, background: '#25D366', minWidth: 32 }}
             >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.519 5.26l-.999 3.648 3.97-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
               </svg>
             </a>
             <a
               href={`tel:${PHONE.replace(/\s/g, '')}`}
-              className="text-[10px] sm:text-xs font-semibold px-2 sm:px-3 py-1 sm:py-1.5 rounded text-white whitespace-nowrap flex-shrink-0"
-              style={{ background: 'linear-gradient(135deg,#dc2626,#b91c1c)', border: '1px solid rgba(239,68,68,0.4)' }}
+              className="text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-white whitespace-nowrap flex-shrink-0 transition-all duration-200 hover:shadow-lg"
+              style={{ background: 'linear-gradient(135deg,#ef4444,#dc2626)', border: '1px solid rgba(239,68,68,0.4)' }}
             >
               Appeler
             </a>
           </div>
 
           {/* Messages */}
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-4 py-3 sm:py-4 space-y-2 sm:space-y-3">
+          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 sm:px-5 py-4 sm:py-5 space-y-3 sm:space-y-4 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
             {messages.map((m, i) => (
-              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in`}>
                 <div
-                  className="max-w-[85%] sm:max-w-[80%] px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-lg sm:rounded-2xl text-xs sm:text-sm leading-relaxed whitespace-pre-wrap break-words"
+                  className="max-w-[88%] sm:max-w-[80%] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl text-sm sm:text-base leading-relaxed whitespace-pre-wrap break-words transition-all duration-200"
                   style={
                     m.role === 'user'
-                      ? { background: 'linear-gradient(135deg,#dc2626,#b91c1c)', color: '#fff', borderBottomRightRadius: 4 }
-                      : { background: 'rgba(255,255,255,0.06)', color: '#e2e8f0', border: '1px solid rgba(255,255,255,0.08)', borderBottomLeftRadius: 4 }
+                      ? {
+                          background: 'linear-gradient(135deg,#ef4444,#dc2626)',
+                          color: '#fff',
+                          borderBottomRightRadius: 4,
+                          boxShadow: '0 2px 8px rgba(239,68,68,0.3)'
+                        }
+                      : {
+                          background: 'rgba(148,163,184,0.08)',
+                          color: '#e2e8f0',
+                          border: '1px solid rgba(148,163,184,0.2)',
+                          borderBottomLeftRadius: 4,
+                          backdropFilter: 'blur(4px)'
+                        }
                   }
                 >
                   {m.content || (loading && i === messages.length - 1 ? '…' : '')}
@@ -316,38 +334,30 @@ export default function ChatWidget() {
               </div>
             ))}
             {loading && messages[messages.length - 1]?.content === '' && (
-              <div className="flex justify-start">
+              <div className="flex justify-start animate-fade-in">
                 <div
-                  className="px-3.5 py-3 rounded-2xl flex gap-1"
-                  style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.08)' }}
+                  className="px-4 py-3 rounded-xl sm:rounded-2xl flex gap-2"
+                  style={{ background: 'rgba(148,163,184,0.08)', border: '1px solid rgba(148,163,184,0.2)', backdropFilter: 'blur(4px)' }}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-2 h-2 rounded-full bg-red-400 animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             )}
 
             {/* Questions rapides — tant que le visiteur n'a rien demandé */}
             {messages.length === 1 && !loading && (
-              <div className="flex flex-col gap-1.5 sm:gap-2 pt-1">
+              <div className="flex flex-col gap-2 pt-2 animate-fade-in">
                 {QUICK_REPLIES.map((q) => (
                   <button
                     key={q}
                     onClick={() => send(q)}
-                    className="text-xs text-left px-2.5 sm:px-3 py-1.5 sm:py-2 rounded transition-colors"
+                    className="text-xs sm:text-sm text-left px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg transition-all duration-200 hover:bg-red-500/20 hover:border-red-400/60 active:scale-95"
                     style={{
-                      background: 'rgba(220,38,38,0.08)',
-                      border: '1px solid rgba(239,68,68,0.3)',
-                      color: 'rgba(255,255,255,0.85)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(220,38,38,0.18)';
-                      e.currentTarget.style.borderColor = 'rgba(239,68,68,0.6)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'rgba(220,38,38,0.08)';
-                      e.currentTarget.style.borderColor = 'rgba(239,68,68,0.3)';
+                      background: 'rgba(239,68,68,0.08)',
+                      border: '1px solid rgba(239,68,68,0.2)',
+                      color: 'rgba(255,255,255,0.9)',
                     }}
                   >
                     {q}
@@ -358,23 +368,23 @@ export default function ChatWidget() {
           </div>
 
           {/* Saisie */}
-          <div className="px-3 py-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <div className="px-4 sm:px-5 py-3 sm:py-4 border-t border-white/10 backdrop-blur-sm">
             {/* Boutons d'action si questionnaire complet */}
             {messages.length > 1 && !questionnaireSent && (
-              <div className="space-y-1.5 mb-2">
+              <div className="space-y-2 mb-3 animate-fade-in">
                 {/* Bouton WhatsApp avec animation */}
                 <button
                   onClick={sendChatInfoToWhatsApp}
                   disabled={loading}
-                  className={`w-full text-xs sm:text-sm px-3 py-2 rounded-lg font-semibold text-white transition-all disabled:opacity-50 ${
+                  className={`w-full text-sm sm:text-base px-4 py-2.5 sm:py-3 rounded-lg font-semibold text-white transition-all duration-200 disabled:opacity-50 ${
                     isQuestionnaireComplete ? 'whatsapp-pulse' : ''
-                  }`}
+                  } hover:shadow-lg active:scale-95`}
                   style={{
-                    background: 'linear-gradient(135deg,#25D366,#128C7E)',
-                    border: '1px solid rgba(37,211,102,0.4)',
+                    background: 'linear-gradient(135deg,#10b981,#059669)',
+                    border: '1px solid rgba(16,185,129,0.4)',
                   }}
                 >
-                  📲 WhatsApp
+                  📲 Envoyer par WhatsApp
                 </button>
 
                 {/* Bouton Waze si complet */}
@@ -383,34 +393,34 @@ export default function ChatWidget() {
                     href={WAZE_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full block text-xs sm:text-sm px-3 py-2 rounded-lg font-semibold text-white text-center transition-all hover:opacity-90 disabled:opacity-50"
+                    className="w-full block text-sm sm:text-base px-4 py-2.5 sm:py-3 rounded-lg font-semibold text-white text-center transition-all duration-200 hover:shadow-lg active:scale-95"
                     style={{
-                      background: 'linear-gradient(135deg,#4A90E2,#357ABD)',
-                      border: '1px solid rgba(74,144,226,0.4)',
+                      background: 'linear-gradient(135deg,#3b82f6,#2563eb)',
+                      border: '1px solid rgba(59,130,246,0.4)',
                     }}
                   >
-                    🗺️ Waze
+                    🗺️ Ouvrir Waze
                   </a>
                 )}
               </div>
             )}
 
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-2 sm:gap-2.5">
               <button
                 onClick={demanderPosition}
                 disabled={loading}
                 aria-label="Partager ma position"
                 title="Partager ma position"
-                className="flex items-center justify-center rounded text-red-400 disabled:opacity-40 flex-shrink-0"
+                className="flex items-center justify-center rounded-lg text-slate-300 disabled:opacity-40 flex-shrink-0 transition-all duration-200 hover:bg-slate-700/40 hover:text-slate-100"
                 style={{
-                  width: 38,
-                  height: 38,
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(239,68,68,0.3)',
-                  minWidth: 38,
+                  width: 42,
+                  height: 42,
+                  background: 'rgba(255,255,255,0.08)',
+                  border: '1px solid rgba(148,163,184,0.2)',
+                  minWidth: 42,
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
@@ -420,31 +430,31 @@ export default function ChatWidget() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && send()}
-                placeholder="Panne…"
+                placeholder="Décrivez votre panne…"
                 aria-label="Votre message"
-                className="flex-1 px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none"
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+                className="flex-1 px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-lg text-sm sm:text-base text-white placeholder-slate-500 focus:outline-none transition-all duration-200 focus:ring-2 focus:ring-red-500/50"
+                style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(148,163,184,0.2)' }}
               />
               <button
                 onClick={() => send()}
                 disabled={loading || !input.trim()}
                 aria-label="Envoyer"
-                className="flex items-center justify-center rounded text-white disabled:opacity-40 flex-shrink-0"
+                className="flex items-center justify-center rounded-lg text-white disabled:opacity-40 flex-shrink-0 transition-all duration-200 hover:shadow-lg active:scale-95"
                 style={{
-                  width: 38,
-                  height: 38,
-                  background: 'linear-gradient(135deg,#dc2626,#b91c1c)',
+                  width: 42,
+                  height: 42,
+                  background: 'linear-gradient(135deg,#ef4444,#dc2626)',
                   border: '1px solid rgba(239,68,68,0.4)',
-                  minWidth: 38,
+                  minWidth: 42,
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3.4 20.4 21 12 3.4 3.6 3 10l12 2-12 2z" />
                 </svg>
               </button>
             </div>
-            <p className="text-[9px] sm:text-[10px] text-slate-500 text-center mt-1.5">
-              112 urgence vitale · 24h/24 sinon
+            <p className="text-xs text-slate-500 text-center mt-2.5">
+              🆘 Urgence vitale ? 112 • 24h/24
             </p>
           </div>
         </div>

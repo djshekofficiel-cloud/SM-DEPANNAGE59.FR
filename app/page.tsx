@@ -57,29 +57,18 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {SERVICES.map((s, i) => (
               <div
                 key={i}
-                className="card-glow-orange group relative p-6 sm:p-8 cursor-default"
-                style={{ animation: `slide-up 0.5s ease-out ${i * 0.08}s both` }}
+                className="group relative p-3 sm:p-4 rounded-lg transition-all duration-300 hover:bg-white/5 border border-white/5 hover:border-red-500/30"
+                style={{ animation: `fade-in 0.4s ease-out ${i * 0.05}s both` }}
               >
-                <div className="card-glow-top" aria-hidden />
-                <div className="absolute top-0 left-0 w-24 h-24 rounded-full pointer-events-none opacity-40 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: 'radial-gradient(circle,rgba(249,115,22,0.22) 0%,transparent 70%)' }} />
-
-                <div className="relative z-10">
-                  <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 select-none">{s.icon}</div>
-                  <h3
-                    className="font-bold mb-2 sm:mb-3 leading-tight text-white"
-                    style={{
-                      fontSize: 'clamp(1.1rem,3vw,1.4rem)',
-                      textShadow: '0 0 14px rgba(249,115,22,0.65), 0 0 30px rgba(255,160,50,0.28)',
-                    }}
-                  >
+                <div className="relative z-10 text-center">
+                  <h3 className="font-semibold text-white text-xs sm:text-sm leading-tight mb-1">
                     {s.title}
                   </h3>
-                  <p className="text-slate-400 leading-relaxed" style={{ fontSize: 'clamp(0.85rem,2vw,0.95rem)' }}>
+                  <p className="text-slate-400 text-[10px] sm:text-xs leading-relaxed">
                     {s.desc}
                   </p>
                 </div>

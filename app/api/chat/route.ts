@@ -20,7 +20,8 @@ const TOOL = {
     parameters: {
       type: 'object',
       properties: {
-        nom: { type: 'string' },
+        nom: { type: 'string', description: 'Nom de famille du client' },
+        prenom: { type: 'string', description: 'Prénom du client' },
         telephone: { type: 'string' },
         localisation: {
           type: 'string',
@@ -30,7 +31,7 @@ const TOOL = {
           type: 'string',
           enum: ['panne', 'accident', 'crevaison', 'batterie', 'carburant', 'remorquage', 'autre'],
         },
-        vehicule: { type: 'string' },
+        vehicule: { type: 'string', description: 'Modèle du véhicule (marque + modèle)' },
         plaque: { type: 'string', description: "Plaque d'immatriculation du véhicule (ex: AB-123-CD)" },
         urgence: { type: 'boolean' },
         date_souhaitee: {
@@ -39,7 +40,7 @@ const TOOL = {
         },
         details: { type: 'string' },
       },
-      required: ['nom', 'telephone', 'localisation', 'type_probleme'],
+      required: ['nom', 'prenom', 'telephone', 'localisation', 'vehicule', 'type_probleme'],
     },
   },
 };
@@ -164,7 +165,6 @@ export async function POST(req: Request) {
 
               if (delta.content) {
                 assistantText += delta.content;
-                controller.enqueue(encoder.encode(delta.content)); // effet « en train d'écrire »
               }
               if (delta.tool_calls) {
                 for (const tc of delta.tool_calls) {
@@ -180,9 +180,17 @@ export async function POST(req: Request) {
           }
 
           const calls = Object.values(toolAcc).filter((c) => c.name);
+          const isToolTurn = finishReason === 'tool_calls' && calls.length > 0;
+
+          // Le texte n'est envoyé au client QUE si ce tour n'est pas un appel d'outil :
+          // certains modèles renvoient à la fois du texte (une question) ET un tool_call
+          // dans le même tour, ce qui produirait un message contradictoire côté client.
+          if (!isToolTurn && assistantText) {
+            controller.enqueue(encoder.encode(assistantText));
+          }
 
           // Sécurité : on ne crée une intervention QUE sur un vrai tool_call du modèle.
-          if (finishReason === 'tool_calls' && calls.length > 0) {
+          if (isToolTurn) {
             convo.push({
               role: 'assistant',
               content: assistantText || '',
@@ -198,7 +206,13 @@ export async function POST(req: Request) {
               let result: unknown;
               try {
                 const input = JSON.parse(c.args || '{}') as InterventionInput;
-                result = await createIntervention(input);
+                const missing = (['nom', 'prenom', 'telephone', 'localisation', 'vehicule', 'type_probleme'] as const)
+                  .filter((k) => !input[k] || String(input[k]).trim() === '');
+                if (missing.length > 0) {
+                  result = { success: false, error: `Informations manquantes : ${missing.join(', ')}. Redemande-les au client avant de réessayer.` };
+                } else {
+                  result = await createIntervention(input);
+                }
               } catch {
                 result = { success: false, error: `CRM indisponible — appeler le ${PHONE}` };
               }

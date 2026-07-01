@@ -302,6 +302,17 @@ export default function ChatWidget() {
             >
               Appeler
             </a>
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Réduire le chat"
+              title="Réduire"
+              className="flex items-center justify-center rounded-lg text-slate-300 flex-shrink-0 transition-all duration-200 hover:bg-white/10 hover:text-white"
+              style={{ width: 32, height: 32, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(148,163,184,0.2)', minWidth: 32 }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M5 12h14" />
+              </svg>
+            </button>
           </div>
 
           {/* Messages */}

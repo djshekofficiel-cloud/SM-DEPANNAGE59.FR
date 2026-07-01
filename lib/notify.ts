@@ -38,6 +38,7 @@ export async function sendInterventionEmail(
     ["Référence", data.ref],
     ["Source", data.source],
     ["Nom", sanitize(data.nom)],
+    ...(data.prenom ? [["Prénom", sanitize(data.prenom)]] : []),
     ["Email", sanitize(data.email || "Non fourni")],
     ["Téléphone", sanitize(data.telephone)],
     ["Localisation", sanitize(data.localisation)],
@@ -104,7 +105,7 @@ export async function sendInterventionWhatsApp(
   const lines = [
     `🚗 NOUVELLE DEMANDE ${data.ref}${data.urgence ? " ⚠️ URGENT" : ""}`,
     ``,
-    `👤 ${sanitize(data.nom)}`,
+    `👤 ${sanitize(data.prenom ? `${data.prenom} ${data.nom}` : data.nom)}`,
     `📧 ${sanitize(data.email || "Non fourni")}`,
     `📞 ${sanitize(data.telephone)}`,
     `📍 ${sanitize(data.localisation)}`,

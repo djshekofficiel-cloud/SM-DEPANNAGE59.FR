@@ -4,6 +4,7 @@ import { sendInterventionEmail, sendInterventionWhatsApp } from "@/lib/notify";
 
 export interface InterventionInput {
   nom: string;
+  prenom?: string;
   telephone: string;
   localisation: string;
   type_probleme: "panne" | "accident" | "crevaison" | "batterie" | "carburant" | "remorquage" | "autre";

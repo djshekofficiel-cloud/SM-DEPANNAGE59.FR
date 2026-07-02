@@ -25,7 +25,7 @@ export function Header() {
             {/* Logo + badge vert pulsant */}
             <Link href="/" aria-label="SM Dépannage — accueil" className="relative transition-transform hover:scale-[1.03] flex items-center gap-2" onClick={() => setOpen(false)}>
               <Image
-                src="/logo-sm-depannage.svg"
+                src="/logo-sm-depannage-hero.png"
                 alt="SM Dépannage"
                 width={40}
                 height={40}

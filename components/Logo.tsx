@@ -14,7 +14,7 @@ export function LogoMark({ className = "h-9 w-9", glow = true }: LogoMarkProps) 
         <span aria-hidden className="absolute inset-0 rounded-[28%] bg-sm-red-500/40 blur-md -z-10" />
       )}
       <Image
-        src="/logo-sm-depannage.svg"
+        src="/logo-sm-depannage-hero.png"
         alt="SM Dépannage"
         width={36}
         height={36}
